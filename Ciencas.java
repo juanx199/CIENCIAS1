@@ -4,12 +4,6 @@
  */
 package ciencas;
 
-/**
- *
- * @author Estudiantes
- */
-
-
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -23,7 +17,7 @@ public class Ciencas {
 
         while (true) {
             System.out.print("Número: ");
-            if (!sc.hasNextInt()) { // Validación simple por si meten letras
+            if (!sc.hasNextInt()) { 
                 sc.next();
                 continue;
             }
@@ -33,42 +27,67 @@ public class Ciencas {
         }
 
         int n = listaDinamica.size();
-        int[] arr = new int[n];
+        if (n == 0) return;
+
+        // Creamos dos arrays iguales para comparar los algoritmos
+        int[] arrBubble = new int[n];
+        int[] arrInsertion = new int[n];
         for (int i = 0; i < n; i++) {
-            arr[i] = listaDinamica.get(i);
+            arrBubble[i] = listaDinamica.get(i);
+            arrInsertion[i] = listaDinamica.get(i);
         }
 
-        // --- Variables de control ---
-        int totalCiclos = 0;      // Vueltas del bucle exterior
-        int comparaciones = 0;    // Cuántas veces preguntamos "es mayor que?"
-        int intercambios = 0;     // Cuántas veces movimos los números de lugar
-        int pasosTotales = 0;     // Suma de comparaciones + intercambios
-
-        // --- Bubble Sort ---
+        // --- LÓGICA BUBBLE SORT ---
+        int compB = 0, interB = 0;
         for (int i = 0; i < n; i++) {
-            totalCiclos++; // Contamos cada vez que el algoritmo inicia una pasada completa
             for (int j = 0; j < n - i - 1; j++) {
-                comparaciones++; 
-                if (arr[j] > arr[j + 1]) {
-                    intercambios++;
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
+                compB++; 
+                if (arrBubble[j] > arrBubble[j + 1]) {
+                    interB++;
+                    int temp = arrBubble[j];
+                    arrBubble[j] = arrBubble[j + 1];
+                    arrBubble[j + 1] = temp;
                 }
             }
         }
-        pasosTotales = comparaciones + intercambios;
 
-        // --- Resultados ---
-     
-        System.out.print("Lista ordenada: ");
-        for (int num : arr) System.out.print(num + " ");
-        
-        System.out.println("\n\nCantidad de números: " + n);
-        System.out.println("Ciclos totales (i): " + totalCiclos);
-        System.out.println("Comparaciones realizadas: " + comparaciones);
-        System.out.println("Intercambios realizados: " + intercambios);
-        System.out.println("PASOS TOTALES (Lógica): " + pasosTotales);
+        // --- LÓGICA INSERTION SORT ---
+        int compI = 0, movI = 0;
+        for (int i = 1; i < n; i++) {
+            int llave = arrInsertion[i];
+            int j = i - 1;
+
+            // Comparamos y desplazamos los elementos
+            while (j >= 0) {
+                compI++; // Contamos la comparación del while
+                if (arrInsertion[j] > llave) {
+                    arrInsertion[j + 1] = arrInsertion[j];
+                    movI++; // Contamos el movimiento de datos
+                    j--;
+                } else {
+                    break; // Si no es mayor, ya encontramos la posición
+                }
+            }
+            arrInsertion[j + 1] = llave;
+            movI++; // Contamos la inserción final del número
+        }
+
+        // --- RESULTADOS ---
+        System.out.println("\n--- COMPARACIÓN DE RESULTADOS ---");
+        System.out.println("Cantidad de números: " + n);
+
+        System.out.println("\n[BUBBLE SORT]");
+        System.out.println("Comparaciones: " + compB);
+        System.out.println("Intercambios: " + interB);
+        System.out.println("PASOS TOTALES: " + (compB + interB));
+
+        System.out.println("\n[INSERTION SORT]");
+        System.out.println("Comparaciones: " + compI);
+        System.out.println("Movimientos/Inserciones: " + movI);
+        System.out.println("PASOS TOTALES: " + (compI + movI));
+
+        System.out.print("\nLista final ordenada: ");
+        for (int num : arrInsertion) System.out.print(num + " ");
         
         sc.close();
     }
