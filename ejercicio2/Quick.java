@@ -9,7 +9,7 @@ package sorts;
  * @author JUANCA
  */
 public class Quick {
-    public class Quick {
+    
     public long pasos = 0;
     public long ciclos = 0;
 
@@ -29,8 +29,9 @@ public class Quick {
         
         for (int j = low; j < high; j++) {
             ciclos++; // Iteración del bucle
+             pasos++; // Condicional
             if (arr[j] < pivot) {
-                pasos++; // Condicional
+               
                 i++;
                 // Swap
                 int temp = arr[i];
@@ -50,4 +51,5 @@ public class Quick {
     }
 }
 }
+
 
