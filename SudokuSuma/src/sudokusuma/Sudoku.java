@@ -60,12 +60,9 @@ public class Sudoku {
                 tablero[fila][col] = 0;
                 backtracks ++;
             }
-            
         }
-        return false;
-        
-    }
-    
+        return false;   
+    }    
     private boolean Sirve(int fila, int col, int num){
         
         //filas
@@ -101,5 +98,6 @@ public class Sudoku {
         System.out.println(" Llamadas recursivs:" + llamadas);
     }
 }
+
 
 
