@@ -45,6 +45,11 @@ public class Sudoku {
             intentos ++;
             if (Sirve(fila,col,num)){
                 tablero[fila][col] = num;
+                
+                if (solver())
+                    return true;
+                tablero[fila][col] = 0;
+                backtracks ++;
             }
             
         }
@@ -55,12 +60,12 @@ public class Sudoku {
     private boolean Sirve(int fila, int col, int num){
         
         //filas
-        for (int f = 0; f < n; f++)
-            if (tablero[fila][f] == num)
+        for (int j = 0; j < n; j++)
+            if (tablero[fila][j] == num)
                 return false;
         //columnas
-        for (int c = 0; c < n; c++)
-            if (tablero[c][col] == num)
+        for (int i = 0; i < n; i++)
+            if (tablero[i][col] == num)
                 return false;
         
         //bloques2x2
@@ -76,7 +81,7 @@ public class Sudoku {
     public void imprimir(){
         for (int[]fila : tablero){
             for (int num : fila)
-                System.out.println(num + " ");
+                System.out.print(num + " ");
             System.out.println();
         }
     }
@@ -87,3 +92,4 @@ public class Sudoku {
         System.out.println(" Llamadas recursivs:" + llamadas);
     }
 }
+
