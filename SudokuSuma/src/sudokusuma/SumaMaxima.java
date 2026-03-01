@@ -8,8 +8,7 @@ package sudokusuma;
  *
  * @author JUANCA
  */
-public class Suma {
-    public class SumaMaxima {
+public class SumaMaxima {
 
     // Método principal de Divide y Vencerás
     public int calcular(int[] arr, int bajo, int alto) {
@@ -56,4 +55,5 @@ public class Suma {
         return sumaIzquierda + sumaDerecha;
     }
 }
+
 
