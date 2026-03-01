@@ -10,11 +10,16 @@ package sudokusuma;
  */
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Sudoku juego = new Sudoku();
+
+        System.out.println("Generando el tablerito aleatorio .....");
+
+        if (juego.solver(){
+            juego.imprimir();
+        }
+        System.out.println();
+        juego.imprimirResultados();
     }
-    
 }
+
