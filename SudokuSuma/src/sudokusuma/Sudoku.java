@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package sudokusuma;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  *
@@ -39,9 +42,15 @@ public class Sudoku {
             if(!vacio)break;
         }
         if (vacio)return true; // se llenó el tablero
+
+        List<Integer> numeros = new ArrayList<>();
+        for(int i = 1; i<=n; i++){
+            numeros.add(i);
+        }
+        // Generamos aleatoriedad para que no muestre siempre la misma respuesta
+        Collections.shuffle(numeros);
         
-        for (int num = 1 ; num <=n; num++){
-            
+        for (int num : numeros){
             intentos ++;
             if (Sirve(fila,col,num)){
                 tablero[fila][col] = num;
@@ -92,4 +101,5 @@ public class Sudoku {
         System.out.println(" Llamadas recursivs:" + llamadas);
     }
 }
+
 
