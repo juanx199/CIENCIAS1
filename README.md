@@ -1,4 +1,5 @@
 # CIENCIAS1
 ## Aquí se guardarán los trabajos que se dejen en clase
-# EL SUDOKU 4X4 Y LA SUMA SUBSECUENTE ESTÁN EN LA CARPETA "SudokuSuma"
+# Ahora toca resolver el algoritmo por becktracking de un sudoku 9x9, y del problema de las monedas
+
 
