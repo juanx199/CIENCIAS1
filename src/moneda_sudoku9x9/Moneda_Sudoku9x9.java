@@ -13,14 +13,23 @@ public class Moneda_Sudoku9x9 {
 
     public static void main(String[] args) {
         // Creamos un tablero de 9x9 lleno de ceros (vacío)
-        int[][] tablero = new int[9][9];
+        int[][] tablero = {
+            {5,3,0,0,7,0,0,0,0},
+            {6,0,0,1,9,5,0,0,0},
+            {0,9,8,0,0,0,0,6,0},
+            {8,0,0,0,6,0,0,0,3},
+            {4,0,0,8,0,3,0,0,1},
+            {7,0,0,0,2,0,0,0,6},
+            {0,6,0,0,0,0,2,8,0},
+            {0,0,0,4,1,9,0,0,5},
+            {0,0,0,0,8,0,0,7,9}
+            //new int[9][9]; 
+        }       ; 
         
         // Usamos un long[] para que el contador pueda ser modificado dentro del método
         long[] contadorPasos = {0};
 
-        System.out.println("--- SOLUCIONADOR DE SUDOKU (BACKTRACKING) ---");
-        System.out.println("Estado inicial: Tablero vacío.");
-        System.out.println("Calculando la primera solución posible...");
+        System.out.println("--- SOLUCIONADOR DE SUDOKU ---");
 
         long tiempoInicio = System.currentTimeMillis();
 

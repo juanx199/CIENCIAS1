@@ -33,26 +33,36 @@ public class SudokuSolver {
 
     private static boolean esValido(int[][] t, int fila, int col, int num) {
         for (int i = 0; i < 9; i++) {
-            // Revisar la fila
-            if (t[fila][i] == num) return false;
-            // Revisar la columna
-            if (t[i][col]== num) return false;
-            // Revisar el cuadrito 3x3
-            if (t[3*(fila/3) + i/3][3* (col/3)+i%3] == num )return false;
+            if(t[fila][i] == num || t[i][col]==num) return false;
+           
+        }
+        int iniF = (fila /3)*3;
+        int iniC = (col /3)*3;
+        for(int i = 0 ; i<3; i++){
+            for (int j = 0; j<3 ; j++){
+                if (t[iniF +i][iniC + j]==num) return false;
+            }
         }
         return true;
     }
     
     public static void imprimirTablero(int[][] tablero) {
-        System.out.println("\n +------+------+------+");
+        System.out.println("\n ### Solución ###");
+        System.out.println("-----------------------");
         for (int i = 0; i < 9; i++) {
-            if (i > 0 && i%3 ==0) System.out.println("|------+------+------+");
-            for (int j=0; j < 9; j++){
-                if(j %3 == 0)System.out.print("| ");
-                System.out.print(tablero[i][j]);
+            if (i % 3 == 0 && i != 0){
+                System.out.println("------+-------+------");
             }
-            System.out.print("|");
-        }
-        System.out.println("+-------+-------+-------+");
+            for (int j = 0; j < 9; j++){
+                
+                if(j %3 == 0 && j != 0){
+                    System.out.print("| ");
+                }
+                
+                System.out.print(tablero[i][j] + " ");
+            }
+            System.out.println("|");
+        }    
+        System.out.println("------------------------");
     }
 }
