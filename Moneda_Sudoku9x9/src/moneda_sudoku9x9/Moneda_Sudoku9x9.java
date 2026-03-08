@@ -12,15 +12,36 @@ import java.util.Scanner;
 public class Moneda_Sudoku9x9 {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        // Creamos un tablero de 9x9 lleno de ceros (vacío)
+        int[][] tablero = {
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0}
+            //new int[9][9]; 
+        }       ; 
         
-        int [][] tableroEjemplo = {};
-        if(SudokuSolver.resolver(tableroEjemplo)){
-            System.out.println("\n Sudoku resuelto");
-            SudokuSolver.imprimirTablero(tableroEjemplo);
-        }else{
-            System.out.println(" No pude encontrar solución :( ");
+        // Usamos un long[] para que el contador pueda ser modificado dentro del método
+        long[] contadorPasos = {0};
+
+        System.out.println("--- SOLUCIONADOR DE SUDOKU ---");
+
+        long tiempoInicio = System.currentTimeMillis();
+
+        if (SudokuSolver.resolver(tablero, contadorPasos)) {
+            SudokuSolver.imprimirTablero(tablero);
+            long tiempoFin = System.currentTimeMillis();
+            
+            System.out.println("\nResumen de ejecución:");
+            System.out.println(">> Pasos (llamadas al algoritmo): " + contadorPasos[0]);
+            System.out.println(">> Tiempo empleado: " + (tiempoFin - tiempoInicio) + " ms");
+        } else {
+            System.out.println("No se encontró ninguna solución.");
         }
     }
-    
 }
