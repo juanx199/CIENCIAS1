@@ -35,7 +35,7 @@ public class Moneda_Sudoku9x9 {
                 monedas[i] = scanner.nextInt();
             }
 
-            CambioVoraz.calcularCambio(monto, monedas);
+            calcularCambio.calcularCambio(monto, monedas);
 
         } else if (opcion == 2) {
 
@@ -74,3 +74,4 @@ public class Moneda_Sudoku9x9 {
     }
 
 }
+
