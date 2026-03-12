@@ -12,36 +12,65 @@ import java.util.Scanner;
 public class Moneda_Sudoku9x9 {
 
     public static void main(String[] args) {
-        // Creamos un tablero de 9x9 lleno de ceros (vacío)
-        int[][] tablero = {
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0}
-            //new int[9][9]; 
-        }       ; 
-        
-        // Usamos un long[] para que el contador pueda ser modificado dentro del método
-        long[] contadorPasos = {0};
 
-        System.out.println("--- SOLUCIONADOR DE SUDOKU ---");
+        Scanner scanner = new Scanner(System.in);
 
-        long tiempoInicio = System.currentTimeMillis();
+        System.out.println("1. Cambio de monedas (Greedy)");
+        System.out.println("2. Resolver Sudoku (Backtracking)");
 
-        if (SudokuSolver.resolver(tablero, contadorPasos)) {
-            SudokuSolver.imprimirTablero(tablero);
-            long tiempoFin = System.currentTimeMillis();
-            
-            System.out.println("\nResumen de ejecución:");
-            System.out.println(">> Pasos (llamadas al algoritmo): " + contadorPasos[0]);
-            System.out.println(">> Tiempo empleado: " + (tiempoFin - tiempoInicio) + " ms");
-        } else {
-            System.out.println("No se encontró ninguna solución.");
+        int opcion = scanner.nextInt();
+
+        if (opcion == 1) {
+
+            System.out.println("Ingrese el monto:");
+            int monto = scanner.nextInt();
+
+            System.out.println("Ingrese cantidad de tipos de moneda:");
+            int n = scanner.nextInt();
+
+            int[] monedas = new int[n];
+
+            for (int i = 0; i < n; i++) {
+                System.out.print("Moneda " + (i + 1) + ": ");
+                monedas[i] = scanner.nextInt();
+            }
+
+            CambioVoraz.calcularCambio(monto, monedas);
+
+        } else if (opcion == 2) {
+
+            int[][] tablero = {
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0}
+            };
+
+            long[] contadorPasos = {0};
+
+            System.out.println("--- SOLUCIONADOR DE SUDOKU ---");
+
+            long tiempoInicio = System.currentTimeMillis();
+
+            if (SudokuSolver.resolver(tablero, contadorPasos)) {
+
+                SudokuSolver.imprimirTablero(tablero);
+
+                long tiempoFin = System.currentTimeMillis();
+
+                System.out.println("\nResumen de ejecución:");
+                System.out.println("Pasos: " + contadorPasos[0]);
+                System.out.println("Tiempo: " + (tiempoFin - tiempoInicio) + " ms");
+
+            } else {
+                System.out.println("No se encontró solución.");
+            }
         }
     }
+
 }
