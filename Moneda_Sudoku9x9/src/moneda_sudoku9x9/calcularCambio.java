@@ -12,33 +12,35 @@ import java.util.Arrays;
 
 public class calcularCambio {
 
-   public static void calcularCambio(int monto, int[] monedas) {
+    public static void calcularCambio(int monto, int[] monedas) {
 
-        // Ordenar monedas de menor a mayor
-        Arrays.sort(monedas);
-
-        System.out.println("\n--- CAMBIO CON MÉTODO VORAZ ---");
-
+        Arrays.sort(monedas); // ordena de menor a mayor
         int restante = monto;
 
-        // recorrer de mayor a menor
+        System.out.println("Cambio para: " + monto);
+
         for (int i = monedas.length - 1; i >= 0; i--) {
 
             int moneda = monedas[i];
+            int contador = 0;
 
             while (restante >= moneda) {
                 restante -= moneda;
-                System.out.println("Se usa moneda de: " + moneda +
-                                   "  -> restante: " + restante);
+                contador++;
+            }
+
+            if (contador > 0) {
+                System.out.println("Moneda de " + moneda + ": " + contador);
             }
         }
 
-        if (restante != 0) {
-            System.out.println("No se pudo dar el cambio exacto.");
-        } else {
+        if (restante == 0) {
             System.out.println("Cambio completado.");
+        } else {
+            System.out.println("No se puede dar cambio exacto.");
         }
     }
 }
+
 
 
