@@ -10,28 +10,30 @@ package moneda_sudoku9x9;
  */
 import java.util.Arrays;
 
-public class CambioMonedasVoraz {
+public class calcularCambio {
 
-    public static void calcularCambio(int monto, int[] monedas){
+    public static void calcularCambio(int monto, int[] monedas) {
 
-        Arrays.sort(monedas); // ordenar monedas
+        // Ordenar monedas de mayor a menor
+        Arrays.sort(monedas);
 
-        System.out.println("Cambio para: " + monto);
+        System.out.println("\n--- CAMBIO CON MÉTODO VORAZ ---");
 
-        for(int i = monedas.length - 1; i >= 0; i--){
+        for (int i = monedas.length - 1; i >= 0; i--) {
 
             int cantidad = monto / monedas[i];
 
-            if(cantidad > 0){
+            if (cantidad > 0) {
                 System.out.println("Moneda de " + monedas[i] + ": " + cantidad);
                 monto = monto % monedas[i];
             }
         }
 
-        if(monto > 0){
-            System.out.println("No se puede dar cambio exacto.");
+        if (monto > 0) {
+            System.out.println("No se puede dar el cambio exacto.");
         } else {
-            System.out.println("Cambio completado.");
+            System.out.println("Cambio completado correctamente.");
         }
     }
 }
+
