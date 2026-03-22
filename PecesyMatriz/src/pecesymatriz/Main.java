@@ -15,33 +15,47 @@ import matriz.SolucionCandy;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Random rnd = new Random();
 
-        System.out.println("--- EJERCICIO 1: DISPENSADORES PEZ ---");
-        System.out.print("Número de dispensadores (n): ");
-        int nPez = sc.nextInt();
-        System.out.print("Dulces a escoger (m): ");
-        int mPez = sc.nextInt();
+            Scanner sc = new Scanner(System.in);
+            Random rnd = new Random();
 
-        int[][] matrizPez = new int[nPez][12];
-        for (int i = 0; i < nPez; i++) {
-            for (int j = 0; j < 12; j++) {
-                matrizPez[i][j] = rnd.nextInt(300) + 1; // Sabor 1-300 
+            // --- EJERCICIO 1: DISPENSADORES PEZ ---
+            // Mantenemos tu lógica original para PEZ
+            System.out.println("--- EJERCICIO 1: DISPENSADORES PEZ ---");
+            System.out.print("Número de dispensadores (n): ");
+            int nPez = sc.nextInt();
+            System.out.print("Dulces a escoger (m): ");
+            int mPez = sc.nextInt();
+
+            int[][] matrizPez = new int[nPez][12];
+            for (int i = 0; i < nPez; i++) {
+                for (int j = 0; j < 12; j++) {
+                    matrizPez[i][j] = rnd.nextInt(300) + 1; 
+                }
             }
-        }
-        System.out.println("Máximo sabor PEZ: " + SolucionPez.calcularMaximoSabor(nPez, mPez, matrizPez));
+            System.out.println("Máximo sabor PEZ: " + SolucionPez.calcularMaximoSabor(nPez, mPez, matrizPez));
 
-        System.out.println("\n--- EJERCICIO 2: CANDY (Caja de Dulces) ---");
-        // Datos del ejemplo del PDF (Sample Input 1) [cite: 178]
-        int[][] matrizCandy = {
-            {1, 8, 2, 1, 9},
-            {1, 7, 3, 5, 2},
-            {1, 2, 10, 3, 10},
-            {8, 4, 7, 9, 1},
-            {7, 1, 3, 1, 6}
-        };
-        int resultadoCandy = SolucionCandy.resolverCandy(5, 5, matrizCandy);
-        System.out.println("Máximo dulces (Esperado 54): " + resultadoCandy); // [cite: 194]
-    }
+            // --- EJERCICIO 2: CANDY (AHORA ALEATORIO) ---
+            System.out.println("\n--- EJERCICIO 2: CANDY (Caja de Dulces Aleatoria) ---");
+            
+            // Pedimos dimensiones para que no siempre sea la misma matriz
+            System.out.print("Ingrese número de filas (M): ");
+            int filas = sc.nextInt();
+            System.out.print("Ingrese número de columnas (N): ");
+            int columnas = sc.nextInt();
+
+            // Generamos la matriz con valores al azar entre 1 y 100
+            int[][] matrizCandyAleatoria = new int[filas][columnas];
+            for (int i = 0; i < filas; i++) {
+                for (int j = 0; j < columnas; j++) {
+                    matrizCandyAleatoria[i][j] = rnd.nextInt(100) + 1; 
+                }
+            }
+
+            // Resolvemos con la nueva matriz
+            int resultadoCandy = SolucionCandy.resolverCandy(filas, columnas, matrizCandyAleatoria);
+            
+            System.out.println("Resultado obtenido con datos al azar: " + resultadoCandy);
+            System.out.println("-------------------------------------------");
+        }
 }
