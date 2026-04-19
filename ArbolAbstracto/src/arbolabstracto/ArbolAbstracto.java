@@ -37,9 +37,12 @@ public static void main(String[] args) {
             System.out.println("4. Salir / Finalizar");
             System.out.print("Seleccione una opción: ");
 
-            int opcion = sc.nextInt();
-            sc.nextLine(); // Limpiar buffer
-
+            int opcion = -1;
+            try {
+                opcion = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                // Al caer aquí, 'opcion' será -1, enviándolo directo al 'default' del menú para advertirle al usuario
+            }
             switch (opcion) {
                 case 1:
                     System.out.print("Nombre de la nueva Hoja: ");
