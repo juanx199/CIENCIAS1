@@ -1,74 +1,123 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package arbolabstracto;
+
 import componentes.Raiz;
 import componentes.Hoja;
 import logica.AbstractComposite;
 import java.util.Scanner;
-// Lo volví a subir 
-/**
- *
- * @author JUANCA
- */
+
 public class ArbolAbstracto {
-    private static Scanner sc = new Scanner(System.in);
-
-public static void main(String[] args) {
-        System.out.println("=== CONFIGURACIÓN INICIAL DEL ÁRBOL ===");
-        System.out.print("Ingrese el nombre de la Raíz Principal: ");
-        String nombreRaiz = sc.nextLine();
+    private static Scanner scanner = new Scanner(System.in);
+    
+    public static void main(String[] args) {
+        System.out.println("=== CREACION DE ESTRUCTURA DE ARBOL ===");
+        System.out.println("Este programa implementa el patron Composite");
+        System.out.println("Permite crear un arbol con raices/ramas y hojas");
+        System.out.println();
         
-        // Creamos el nodo raíz principal
-        AbstractComposite miArbol = new Raiz(nombreRaiz);
+        System.out.print("Ingrese el nombre de la raiz principal: ");
+        String nombreRaiz = scanner.nextLine();
         
-        ejecutarMenu(miArbol);
+        AbstractComposite raizPrincipal = new Raiz(nombreRaiz);
+        
+        menuPrincipal(raizPrincipal);
     }
-
-    private static void ejecutarMenu(AbstractComposite nodoActual) {
-        boolean volver = false;
-
-        while (!volver) {
-            System.out.println("\n--- GESTIONANDO: " + nodoActual.getNombre() + " ---");
-            System.out.println("1. Agregar Hoja (Dato final)");
-            System.out.println("2. Agregar Sub-Raíz (Rama)");
-            System.out.println("3. Ver estructura completa");
-            System.out.println("4. Salir / Finalizar");
-            System.out.print("Seleccione una opción: ");
-
-            int opcion = -1;
-            try {
-                opcion = Integer.parseInt(sc.nextLine());
-            } catch (NumberFormatException e) {
-                // Al caer aquí, 'opcion' será -1, enviándolo directo al 'default' del menú para advertirle al usuario
-            }
-            switch (opcion) {
+    
+    private static void menuPrincipal(AbstractComposite nodoActual) {
+        boolean salir = false;
+        
+        while(!salir) {
+            System.out.println("\n==========================================");
+            System.out.println("NODO ACTUAL: " + nodoActual.getNombre());
+            System.out.println("TIPO: " + (nodoActual.esHoja() ? "Hoja" : "Raiz/Rama"));
+            System.out.println("==========================================");
+            System.out.println("1. Agregar una Hoja");
+            System.out.println("2. Agregar una Rama (Sub-raiz)");
+            System.out.println("3. Ver estructura del arbol");
+            System.out.println("4. Salir");
+            System.out.print("Opcion: ");
+            
+            int opcion = scanner.nextInt();
+            scanner.nextLine();
+            
+            switch(opcion) {
                 case 1:
-                    System.out.print("Nombre de la nueva Hoja: ");
-                    String nHoja = sc.nextLine();
-                    nodoActual.agregar(new Hoja(nHoja));
+                    agregarHoja(nodoActual);
                     break;
                 case 2:
-                    System.out.print("Nombre de la nueva Rama: ");
-                    String nRama = sc.nextLine();
-                    AbstractComposite nuevaRama = new Raiz(nRama);
-                    nodoActual.agregar(nuevaRama);
-                    System.out.println("¿Desea entrar a esta nueva rama para agregarle hijos ahora? (s/n)");
-                    if(sc.nextLine().equalsIgnoreCase("s")) {
-                        ejecutarMenu(nuevaRama); // Recursividad para navegar el árbol
-                    }
+                    agregarRama(nodoActual);
                     break;
                 case 3:
-                    System.out.println("\nVISUALIZACIÓN:");
-                    nodoActual.mostrarDetalle(0);
+                    verEstructura(nodoActual);
                     break;
                 case 4:
-                    volver = true;
+                    salir = true;
+                    System.out.println("Programa finalizado.");
                     break;
                 default:
-                    System.out.println("Opción inválida.");
+                    System.out.println("Opcion no valida.");
             }
         }
+    }
+    
+    private static void agregarHoja(AbstractComposite nodoActual) {
+        if(nodoActual.esHoja()) {
+            System.out.println("Error: No se puede agregar hijos a una Hoja");
+            return;
+        }
+        
+        System.out.print("Nombre de la nueva Hoja: ");
+        String nombre = scanner.nextLine();
+        
+        if(nombre.trim().isEmpty()) {
+            System.out.println("Error: El nombre no puede estar vacio");
+            return;
+        }
+        
+        Hoja nuevaHoja = new Hoja(nombre);
+        nodoActual.agregar(nuevaHoja);
+    }
+    
+    private static void agregarRama(AbstractComposite nodoActual) {
+        if(nodoActual.esHoja()) {
+            System.out.println("Error: No se puede agregar hijos a una Hoja");
+            return;
+        }
+        
+        System.out.print("Nombre de la nueva Rama: ");
+        String nombre = scanner.nextLine();
+        
+        if(nombre.trim().isEmpty()) {
+            System.out.println("Error: El nombre no puede estar vacio");
+            return;
+        }
+        
+        Raiz nuevaRama = new Raiz(nombre);
+        nodoActual.agregar(nuevaRama);
+        
+        System.out.print("Desea entrar a esta nueva rama para administrarla? (s/n): ");
+        String respuesta = scanner.nextLine();
+        
+        if(respuesta.equalsIgnoreCase("s")) {
+            menuPrincipal(nuevaRama);
+        }
+    }
+    
+    private static void verEstructura(AbstractComposite nodoActual) {
+        System.out.println("\n--- ESTRUCTURA DEL ARBOL ---");
+        System.out.println("(+) = Nodo compuesto (puede tener hijos)");
+        System.out.println("(-) = Nodo hoja (no puede tener hijos)");
+        System.out.println();
+        
+        // Buscar la raiz principal
+        AbstractComposite raiz = encontrarRaiz(nodoActual);
+        if(raiz != null) {
+            raiz.mostrarDetalle(0);
+        } else {
+            nodoActual.mostrarDetalle(0);
+        }
+    }
+    
+    private static AbstractComposite encontrarRaiz(AbstractComposite nodo) {
+        return nodo;
     }
 }
