@@ -1,19 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package componentes;
+
 import logica.AbstractComposite;
-/**
- *
- * @author JUANCA
- */
-public class Hoja extends AbstractComposite{
-    public Hoja(String nombre){
+
+public class Hoja extends AbstractComposite {
+    
+    public Hoja(String nombre) {
         super(nombre);
     }
+    
     @Override
-    public void mostrarDetalle(int profundidad){
-        System.out.println(" ".repeat(profundidad) + " [Hoja]" + nombre);
+    public void mostrarDetalle(int profundidad) {
+        String espacios = "";
+        for(int i = 0; i < profundidad; i++) {
+            espacios = espacios + "  ";
+        }
+        System.out.println(espacios + "- " + nombre + " (Hoja)");
+    }
+    
+    @Override
+    public boolean esHoja() {
+        return true;
     }
 }
