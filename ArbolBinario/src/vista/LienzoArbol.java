@@ -9,18 +9,16 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import javax.swing.JPanel;
 
-/**
- * Componente gráfico encargado de dibujar recursivamente 
- * las aristas y nodos del Árbol Binario de Búsqueda.
- */
+
+ // Componente gráfico encargado de dibujar recursivamente las aristas y nodos del Árbol Binario de Búsqueda.
+ 
 public class LienzoArbol extends JPanel {
     private Nodo raiz;
     private final int RADIO = 23;
     private final int SEPARACION_Y = 60;
 
     public LienzoArbol() {
-        setBackground(new Color(245, 245, 245)); // Fondo gris claro muy tenue
-    }
+        setBackground(new Color(245, 245, 245)); 
 
     public void setRaiz(Nodo raiz) {
         this.raiz = raiz;
@@ -35,7 +33,7 @@ public class LienzoArbol extends JPanel {
             // Antialiasing para suavizar los trazos redondos
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             
-            // Calculamos el inicio en el centro superior
+            // Calcular el inicio en el centro superior
             dibujarNodo(g2, raiz, getWidth() / 2, 40, getWidth() / 4);
         }
     }
@@ -43,7 +41,7 @@ public class LienzoArbol extends JPanel {
     private void dibujarNodo(Graphics2D g, Nodo nodo, int x, int y, int separacionX) {
         // Dibujar Arista a hijo Izquierdo
         if (nodo.getHijoIzquierdo() != null) {
-            g.setColor(new Color(100, 100, 100)); // Gris oscuro
+            g.setColor(new Color(100, 100, 100)); 
             g.drawLine(x, y, x - separacionX, y + SEPARACION_Y);
             dibujarNodo(g, nodo.getHijoIzquierdo(), x - separacionX, y + SEPARACION_Y, separacionX / 2);
         }
@@ -56,7 +54,7 @@ public class LienzoArbol extends JPanel {
         }
 
         // Dibujar Círculo (Fondo del nodo)
-        g.setColor(new Color(41, 128, 185)); // Azul elegante
+        g.setColor(new Color(41, 128, 185)); 
         g.fillOval(x - RADIO, y - RADIO, RADIO * 2, RADIO * 2);
         
         // Dibujar Borde del Ndo
@@ -71,7 +69,7 @@ public class LienzoArbol extends JPanel {
         int anchoTexto = fm.stringWidth(texto);
         int altoTexto = fm.getAscent();
         
-        // Offset matemático para centrar exactamente los textos en el círculo
+        //  centrar los textos en el círculo
         g.drawString(texto, x - (anchoTexto / 2), y + (altoTexto / 2) - 2);
     }
 }
