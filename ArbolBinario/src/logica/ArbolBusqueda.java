@@ -84,9 +84,9 @@ public class ArbolBusqueda extends ArbolBase {
         return actual.getHijoIzquierdo() == null ? actual.getValor() : encontrarMinimo(actual.getHijoIzquierdo());
     }
     
-    // Método extra para previsualizar los resultados en orden
+    // Recorridos para analizar los resultados bajo distintos algoritmos
     public void imprimirInOrder() {
-        System.out.print("In-Order: ");
+        System.out.print("In-Order:   ");
         inOrderRecursivo(raiz);
         System.out.println();
     }
@@ -96,6 +96,34 @@ public class ArbolBusqueda extends ArbolBase {
             inOrderRecursivo(actual.getHijoIzquierdo());
             System.out.print(actual.getValor() + " ");
             inOrderRecursivo(actual.getHijoDerecho());
+        }
+    }
+    
+    public void imprimirPreOrder() {
+        System.out.print("Pre-Order:  ");
+        preOrderRecursivo(raiz);
+        System.out.println();
+    }
+    
+    private void preOrderRecursivo(Nodo actual) {
+        if (actual != null) {
+            System.out.print(actual.getValor() + " ");
+            preOrderRecursivo(actual.getHijoIzquierdo());
+            preOrderRecursivo(actual.getHijoDerecho());
+        }
+    }
+    
+    public void imprimirPostOrder() {
+        System.out.print("Post-Order: ");
+        postOrderRecursivo(raiz);
+        System.out.println();
+    }
+    
+    private void postOrderRecursivo(Nodo actual) {
+        if (actual != null) {
+            postOrderRecursivo(actual.getHijoIzquierdo());
+            postOrderRecursivo(actual.getHijoDerecho());
+            System.out.print(actual.getValor() + " ");
         }
     }
 }

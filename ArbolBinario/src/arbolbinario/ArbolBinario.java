@@ -6,6 +6,8 @@ package arbolbinario;
 
 import logica.ArbolBusqueda;
 import java.util.Scanner;
+import javax.swing.JFrame;
+import vista.LienzoArbol;
 
 /**
  * Clase principal simulando un menú interactivo para el Árbol Binario de Búsqueda.
@@ -26,8 +28,9 @@ public class ArbolBinario {
             System.out.println("1. Insertar un valor");
             System.out.println("2. Eliminar un valor");
             System.out.println("3. Buscar un valor");
-            System.out.println("4. Ver estado del Árbol (In-Order, Altura y Raíz)");
-            System.out.println("5. Salir");
+            System.out.println("4. Ver estado general del Árbol (Consola)");
+            System.out.println("5. Visualizar Árbol Gráficamente (Ventana Swing)");
+            System.out.println("6. Salir");
             System.out.print("Elige una opción: ");
             
             try {
@@ -61,12 +64,31 @@ public class ArbolBinario {
                         if (arbol.getRaiz() == null) {
                             System.out.println("El árbol está totalmente vacío.");
                         } else {
+                            arbol.imprimirPreOrder();
                             arbol.imprimirInOrder();
+                            arbol.imprimirPostOrder();
                             System.out.println("Altura total del árbol: " + arbol.getAltura());
                             System.out.println("Valor de la Raiz Principal: " + arbol.getRaiz().getValor());
                         }
                         break;
                     case 5:
+                        if (arbol.getRaiz() == null) {
+                            System.out.println("\nEl árbol está vacío. Inserta nodos primero.");
+                        } else {
+                            System.out.println("\n==> Abriendo ventana gráfica. Puedes seguir usando este menú.");
+                            JFrame ventana = new JFrame("Visualizador Árbol Binario de Búsqueda");
+                            ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                            ventana.setSize(900, 700);
+                            ventana.setLocationRelativeTo(null);
+                            
+                            LienzoArbol lienzo = new LienzoArbol();
+                            lienzo.setRaiz(arbol.getRaiz());
+                            
+                            ventana.add(lienzo);
+                            ventana.setVisible(true);
+                        }
+                        break;
+                    case 6:
                         salir = true;
                         System.out.println("Saliendo del programa...");
                         break;
