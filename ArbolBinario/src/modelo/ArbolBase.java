@@ -1,16 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package modelo;
 
 import estructura.Nodo;
 
-/**
- * Clase base abstracta que define el comportamiento y propiedades generales del árbol.
- *
- * @author JUANCA
- */
+
+ // Clase base abstracta que define comportamiento y propiedades generales del árbol.
+  
 public abstract class ArbolBase {
     protected Nodo raiz;
 
