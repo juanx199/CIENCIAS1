@@ -9,7 +9,7 @@ import modelo.ArbolBase;
 
 /**
  * Árbol Binario de Búsqueda que hereda propiedades base.
- * Implementa métodos propios de un BST.
+ * Implementa métodos de un árbol binario de busqueda.
  *
  * @author JUANCA
  */
