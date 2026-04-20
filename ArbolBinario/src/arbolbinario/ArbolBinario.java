@@ -9,11 +9,8 @@ import java.util.Scanner;
 import javax.swing.JFrame;
 import vista.LienzoArbol;
 
-/**
- * Clase principal simulando un menú interactivo para el Árbol Binario de Búsqueda.
- *
- * @author JUANCA
- */
+
+ // Clase principal simulando un menú ppara el Árbol Binario de Búsqueda.
 public class ArbolBinario {
 
     public static void main(String[] args) {
